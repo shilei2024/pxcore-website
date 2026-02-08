@@ -1,0 +1,488 @@
+---
+import '../styles/global.css';
+
+const navItems = [
+  { label: '产品功能', href: '#features' },
+  { label: '解决方案', href: '#solutions' },
+  { label: '定价方案', href: '#pricing' },
+  { label: '关于我们', href: '#about' }
+];
+
+const painPoints = [
+  {
+    num: '40%',
+    title: '订单处理耗时',
+    desc: '业助40%的时间花在录单、对账等重复劳动上',
+    color: '#F97316'
+  },
+  {
+    num: '80%',
+    title: '沟通在邮件/微信',
+    desc: '原厂、代理商、客户间信息孤岛，协同效率极低',
+    color: '#2563EB'
+  },
+  {
+    num: '<50%',
+    title: '预测准确率低',
+    desc: '代理商给原厂的预测准确率不足50%，导致缺货或库存积压',
+    color: '#EF4444'
+  },
+  {
+    num: '15-20%',
+    title: '库存超期呆滞',
+    desc: '平均15-20%库存超期，年损失达销售额的3-5%',
+    color: '#A855F7'
+  },
+  {
+    num: '50%',
+    title: '资金周转困难',
+    desc: '小客户不放账、大客户账期长且拖欠，资金流转压力巨大',
+    color: '#06B6D4'
+  }
+];
+
+const features = [
+  {
+    title: '智能录单助手',
+    desc: 'AI自动识别客户发来的订单截图或PDF，提取型号、数量等信息，预填表单。结合历史成交价智能推荐报价，效率提升70%。',
+    color: '#2563EB'
+  },
+  {
+    title: '智能对账机器人',
+    desc: 'AI自动完成出货运单、发票、回款的三单匹配，高亮标注差异，生成对账报告。从15天缩短至1小时，准确率>95%。',
+    color: '#F97316'
+  },
+  {
+    title: '交期预测与预警',
+    desc: '整合原厂供货周期数据，AI动态预测到货时间。当交期可能延迟时提前预警，提示业助主动沟通客户。',
+    color: '#06B6D4'
+  },
+  {
+    title: '智能预测协同',
+    desc: '基于历史销售、市场趋势与客户预测，AI生成采购预测并一键同步原厂。预测与实际对比分析，持续优化准确率。',
+    color: '#A855F7'
+  },
+  {
+    title: '库存健康度监控',
+    desc: '实时监控库存库龄，设置不同物料安全库存期。提前30/60/90天分级预警超期风险，自动推荐促销、调拨等处理方案。',
+    color: '#22C55E'
+  },
+  {
+    title: '供应链金融服务',
+    desc: '基于平台真实交易数据，为代理商提供订单融资、库存融资、应收账款保理等金融服务，解决资金周转难题。',
+    color: '#EC4899'
+  }
+];
+
+const steps = [
+  {
+    phase: '第一阶段 · 0-6个月',
+    phaseColor: '#60A5FA',
+    title: '智能工具',
+    desc: '为代理商打造"智能订单与资金管理中心"，解决最核心的录单、跟单、对账痛点。',
+    items: ['智能对账机器人', 'AI录单助手', '基础库存管理', '交期跟踪与预警'],
+    goal: '目标：100家种子客户',
+    border: '#2563EB44',
+    tagBg: '#2563EB22'
+  },
+  {
+    phase: '第二阶段 · 6-12个月',
+    phaseColor: '#F97316',
+    title: '协同网络',
+    desc: '连接原厂与终端客户，将系统从"管理工具"升级为"协同网络"。',
+    items: ['供应商协同门户', '客户自助门户', '智能预测引擎', '库存健康度仪表盘'],
+    goal: '目标：600家客户 · 10家原厂接入',
+    border: '#F9731644',
+    tagBg: '#F9731622'
+  },
+  {
+    phase: '第三阶段 · 12-24个月',
+    phaseColor: '#22C55E',
+    title: '数据生态',
+    desc: '构建产业数据生态，开放API连接更多服务，实现供应链金融与行业洞察。',
+    items: ['供应链金融对接', '行业数据洞察', 'API开放平台', '供应链碳足迹追踪'],
+    goal: '目标：1800家客户 · ARR 9000万',
+    border: '#22C55E44',
+    tagBg: '#22C55E22'
+  }
+];
+
+const pricing = [
+  {
+    name: '基础版',
+    price: '¥399',
+    unit: '/用户/月',
+    desc: '适合3-5人小型代理商团队，快速上手核心AI功能',
+    features: ['智能录单助手', 'AI智能对账', '基础库龄监控', '交期跟踪提醒', '基础数据报表'],
+    button: '开始使用',
+    highlight: false
+  },
+  {
+    name: '专业版',
+    price: '¥1,999',
+    unit: '/企业/月',
+    desc: '适合5-15人中型代理商，全方位协同与预测优化',
+    features: ['基础版全部功能', '智能预测引擎', '原厂协同门户', '客户自助门户', '高级库存预警与建议', '供应链可视化仪表盘'],
+    button: '立即试用',
+    highlight: true
+  },
+  {
+    name: '生态版',
+    price: '定制',
+    unit: '按流水比例',
+    desc: '适合大型代理商与原厂，深度定制与全生态服务',
+    features: ['专业版全部功能', '供应链金融对接', '行业数据洞察报告', '开放API平台', '专属客户成功经理', '定制开发支持'],
+    button: '联系我们',
+    highlight: false
+  }
+];
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="鹏芯元创是一个以AI为核心的代理商协同SaaS平台，从智能对账与录单切入，连接原厂与终端客户，构建产业协同网络。"
+    />
+    <meta name="theme-color" content="#0A0E1A" />
+    <link rel="canonical" href="https://www.pxcore.com.cn/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>鹏芯元创 | AI驱动的电子元器件产业协同平台</title>
+  </head>
+  <body class="min-h-screen bg-[#0A0E1A] text-slate-200">
+    <header class="sticky top-0 z-30 border-b border-slate-800/80 bg-[#0A0E1A]/80 backdrop-blur">
+      <div class="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between px-6 lg:px-[120px]">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#2563EB] to-[#06B6D4] text-white">
+            鹏
+          </div>
+          <span class="text-lg font-bold text-white">鹏芯元创</span>
+        </div>
+        <nav class="hidden items-center gap-9 text-sm font-medium text-slate-400 md:flex">
+          {navItems.map((item) => (
+            <a href={item.href} class="transition hover:text-white">{item.label}</a>
+          ))}
+        </nav>
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="hidden text-sm font-medium text-slate-300 md:inline">
+            登录
+          </a>
+          <a
+            href="#cta"
+            class="rounded-lg bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(37,99,235,0.35)]"
+          >
+            免费试用
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="bg-[#0A0E1A]">
+        <div class="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 px-6 py-20 text-center lg:px-[120px]">
+          <div class="flex items-center gap-2 rounded-full border border-[#2563EB44] bg-[#2563EB15] px-5 py-2 text-xs font-medium text-[#60A5FA]">
+            <span class="h-2 w-2 rounded-full bg-[#2563EB]"></span>
+            AI驱动 · 产业协同 · 全链路赋能
+          </div>
+          <h1 class="max-w-[1000px] text-4xl font-black leading-tight text-white md:text-5xl lg:text-[48px]">
+            让电子元器件供应链
+            <br />
+            更智能、更协同、更高效
+          </h1>
+          <p class="max-w-[800px] text-base leading-relaxed text-slate-400 md:text-lg">
+            鹏芯元创是一个以AI为核心的代理商协同SaaS平台，从智能对账与录单切入，连接原厂与终端客户，构建产业协同网络，帮助代理商降低80%对账时间，提升预测准确率20%以上。
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#cta"
+              class="rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] px-9 py-4 text-base font-semibold text-white shadow-[0_12px_32px_rgba(37,99,235,0.45)]"
+            >
+              申请免费试用
+            </a>
+            <a
+              href="#contact"
+              class="rounded-xl border border-slate-700 bg-white/5 px-9 py-4 text-base font-medium text-slate-300"
+            >
+              预约产品演示
+            </a>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 md:text-sm">
+            <span>已服务</span>
+            <span class="font-semibold text-slate-300">200+ 代理商</span>
+            <span class="h-4 w-px bg-slate-700"></span>
+            <span class="font-semibold text-slate-300">50+ 原厂</span>
+            <span class="h-4 w-px bg-slate-700"></span>
+            <span class="font-semibold text-slate-300">¥30亿+ 交易流水</span>
+          </div>
+          <div class="w-full rounded-2xl border border-slate-800 bg-[#111827] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+            <div class="flex h-10 items-center gap-2 rounded-t-2xl bg-[#1E293B] px-4">
+              <span class="h-2.5 w-2.5 rounded-full bg-[#EF4444]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#F59E0B]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#22C55E]"></span>
+            </div>
+            <div class="flex flex-col items-center gap-5 p-8">
+              <span class="text-sm font-medium tracking-[0.2em] text-slate-500">智能对账仪表盘</span>
+              <img
+                src="/images/mockup.svg"
+                alt="产品界面预览"
+                class="w-full max-w-[800px] rounded-xl border border-slate-800"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" class="bg-[#0F1629]">
+        <div class="mx-auto w-full max-w-[1200px] px-6 py-24 lg:px-[120px]">
+          <div class="mx-auto flex max-w-[720px] flex-col items-center gap-4 text-center">
+            <span class="text-xs font-semibold tracking-[0.3em] text-[#F97316]">行业痛点</span>
+            <h2 class="text-3xl font-bold text-white md:text-4xl">
+              万亿市场中的五大效率黑洞
+            </h2>
+            <p class="text-sm leading-relaxed text-slate-400 md:text-base">
+              电子元器件分销行业数字化率不足30%，大量依赖Excel、邮件和人工处理
+            </p>
+          </div>
+          <div class="mt-12 grid gap-5 md:grid-cols-2">
+            {painPoints.slice(0, 2).map((item) => (
+              <div class="rounded-2xl border border-slate-800 bg-[#111827] p-7">
+                <div class="text-3xl font-bold" style={`color:${item.color}`}>{item.num}</div>
+                <div class="mt-3 text-base font-semibold text-slate-200">{item.title}</div>
+                <p class="mt-3 text-sm leading-relaxed text-slate-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-5 grid gap-5 md:grid-cols-3">
+            {painPoints.slice(2).map((item) => (
+              <div class="rounded-2xl border border-slate-800 bg-[#111827] p-7">
+                <div class="text-3xl font-bold" style={`color:${item.color}`}>{item.num}</div>
+                <div class="mt-3 text-base font-semibold text-slate-200">{item.title}</div>
+                <p class="mt-3 text-sm leading-relaxed text-slate-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="bg-[#0A0E1A]">
+        <div class="mx-auto w-full max-w-[1200px] px-6 py-24 lg:px-[120px]">
+          <div class="mx-auto flex max-w-[720px] flex-col items-center gap-4 text-center">
+            <span class="text-xs font-semibold tracking-[0.3em] text-[#2563EB]">核心功能</span>
+            <h2 class="text-3xl font-bold text-white md:text-4xl">
+              六大AI能力，重塑供应链核心流程
+            </h2>
+            <p class="text-sm leading-relaxed text-slate-400 md:text-base">
+              从执行优化到预测协同再到库存健康，AI深度嵌入每一个业务环节
+            </p>
+          </div>
+          <div class="mt-12 grid gap-6 md:grid-cols-2">
+            {features.map((item, idx) => (
+              <div class="rounded-2xl border border-slate-800 bg-gradient-to-b from-[#111827] to-[#0F172A] p-8">
+                <div
+                  class="flex h-13 w-13 items-center justify-center rounded-xl"
+                  style={`background-color:${item.color}22`}
+                >
+                  <span class="text-base font-semibold" style={`color:${item.color}`}>{idx + 1}</span>
+                </div>
+                <h3 class="mt-5 text-lg font-bold text-white">{item.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#0F1629]">
+        <div class="mx-auto w-full max-w-[1200px] px-6 py-24 lg:px-[120px]">
+          <div class="mx-auto flex max-w-[720px] flex-col items-center gap-4 text-center">
+            <span class="text-xs font-semibold tracking-[0.3em] text-[#06B6D4]">飞轮效应</span>
+            <h2 class="text-3xl font-bold text-white md:text-4xl">
+              从工具到网络，构建产业协同生态
+            </h2>
+            <p class="text-sm leading-relaxed text-slate-400 md:text-base">
+              三阶段演进路径，每个阶段都有明确的里程碑和变现潜力
+            </p>
+          </div>
+          <div class="mt-12 grid gap-6 md:grid-cols-3">
+            {steps.map((step) => (
+              <div class="rounded-2xl border bg-[#111827] p-9" style={`border-color:${step.border}`}>
+                <span
+                  class="inline-flex rounded-full px-4 py-1 text-xs font-semibold"
+                  style={`background-color:${step.tagBg};color:${step.phaseColor}`}
+                >
+                  {step.phase}
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-white">{step.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-400">{step.desc}</p>
+                <ul class="mt-4 space-y-2 text-sm text-slate-300">
+                  {step.items.map((item) => (
+                    <li>✦ {item}</li>
+                  ))}
+                </ul>
+                <div
+                  class="mt-5 rounded-xl px-5 py-3 text-xs font-semibold"
+                  style={`background-color:${step.tagBg};color:${step.phaseColor}`}
+                >
+                  {step.goal}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y border-slate-800 bg-[#0A0E1A]">
+        <div class="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-8 px-6 py-20 text-center lg:px-[120px] lg:text-left">
+          {[
+            { num: '80%+', label: '对账效率提升', color: '#2563EB' },
+            { num: '70%', label: '录单效率提升', color: '#F97316' },
+            { num: '20%+', label: '预测准确率提升', color: '#06B6D4' },
+            { num: '95%+', label: '对账匹配准确率', color: '#22C55E' }
+          ].map((stat) => (
+            <div class="flex min-w-[160px] flex-col items-center gap-2 lg:items-start">
+              <span class="text-4xl font-bold" style={`color:${stat.color}`}>{stat.num}</span>
+              <span class="text-sm text-slate-400">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="pricing" class="bg-[#0F1629]">
+        <div class="mx-auto w-full max-w-[1200px] px-6 py-24 lg:px-[120px]">
+          <div class="mx-auto flex max-w-[720px] flex-col items-center gap-4 text-center">
+            <span class="text-xs font-semibold tracking-[0.3em] text-[#A855F7]">定价方案</span>
+            <h2 class="text-3xl font-bold text-white md:text-4xl">
+              灵活定价，按需选择
+            </h2>
+            <p class="text-sm leading-relaxed text-slate-400 md:text-base">
+              从小团队到大型代理商，我们为不同规模的企业提供最适合的解决方案
+            </p>
+          </div>
+          <div class="mt-12 grid gap-6 md:grid-cols-3">
+            {pricing.map((tier) => (
+              <div
+                class={`flex flex-col rounded-2xl border bg-[#111827] p-10 ${tier.highlight ? 'border-[#2563EB88] shadow-[0_20px_60px_rgba(37,99,235,0.2)]' : 'border-slate-800'}`}
+              >
+                {tier.highlight && (
+                  <span class="mb-4 inline-flex w-fit rounded-full bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] px-4 py-1 text-[11px] font-bold text-white">
+                    最受欢迎
+                  </span>
+                )}
+                <span class={`text-xs font-semibold tracking-[0.2em] ${tier.highlight ? 'text-[#60A5FA]' : 'text-slate-400'}`}>{tier.name}</span>
+                <div class="mt-4 flex items-end gap-2">
+                  <span class="text-4xl font-bold text-white">{tier.price}</span>
+                  <span class="text-sm text-slate-500">{tier.unit}</span>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-slate-400">{tier.desc}</p>
+                <div class="my-6 h-px w-full bg-slate-800"></div>
+                <ul class="flex flex-col gap-3 text-sm text-slate-300">
+                  {tier.features.map((feature) => (
+                    <li>✓ {feature}</li>
+                  ))}
+                </ul>
+                <a
+                  href="#cta"
+                  class={`mt-8 rounded-xl px-4 py-3 text-center text-sm font-semibold ${tier.highlight ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white shadow-[0_12px_24px_rgba(37,99,235,0.35)]' : 'border border-slate-700 bg-white/5 text-slate-200'}`}
+                >
+                  {tier.button}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" class="bg-gradient-to-b from-[#0A0E1A] via-[#111D3A] to-[#0A0E1A]">
+        <div class="mx-auto flex w-full max-w-[1200px] justify-center px-6 py-24 lg:px-[120px]">
+          <div class="w-full max-w-[1000px] rounded-3xl border border-[#2563EB44] bg-[#111827] p-12 text-center shadow-[0_30px_80px_rgba(37,99,235,0.2)] md:p-16">
+            <span class="text-xs font-semibold tracking-[0.3em] text-[#60A5FA]">开启智能协同之旅</span>
+            <h2 class="mt-4 text-3xl font-bold text-white md:text-4xl">
+              让您的团队从"执行者"变为"决策者"
+            </h2>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400 md:text-base">
+              3个月免费试用，无需绑定信用卡。体验AI如何在1小时内完成您团队15天的对账工作。
+            </p>
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="#contact"
+                class="rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] px-10 py-4 text-base font-semibold text-white shadow-[0_12px_32px_rgba(37,99,235,0.45)]"
+              >
+                申请免费试用
+              </a>
+              <a
+                href="#contact"
+                class="rounded-xl border border-slate-700 bg-white/5 px-10 py-4 text-base font-medium text-slate-300"
+              >
+                预约演示
+              </a>
+            </div>
+            <p class="mt-6 text-xs text-slate-500 md:text-sm">
+              已有200+代理商选择鹏芯元创 · 数据安全通过ISO 27001认证
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="about" class="border-t border-slate-800 bg-[#060810]">
+      <div class="mx-auto w-full max-w-[1200px] px-6 py-16 lg:px-[120px]">
+        <div class="flex flex-col gap-12 lg:flex-row lg:justify-between">
+          <div class="max-w-sm space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#2563EB] to-[#06B6D4] text-white">
+                鹏
+              </div>
+              <span class="text-lg font-bold text-white">鹏芯元创</span>
+            </div>
+            <p class="text-sm leading-relaxed text-slate-500">
+              AI驱动的电子元器件产业协同平台，让供应链更智能、更协同、更高效。
+            </p>
+          </div>
+          <div class="grid gap-8 text-sm text-slate-500 sm:grid-cols-3">
+            <div class="space-y-3">
+              <h4 class="text-xs font-semibold uppercase text-slate-400">产品</h4>
+              <p>智能对账</p>
+              <p>智能录单</p>
+              <p>预测协同</p>
+              <p>库存监控</p>
+              <p>供应链金融</p>
+            </div>
+            <div class="space-y-3">
+              <h4 class="text-xs font-semibold uppercase text-slate-400">公司</h4>
+              <p>关于我们</p>
+              <p>团队介绍</p>
+              <p>加入我们</p>
+              <p>联系我们</p>
+            </div>
+            <div class="space-y-3">
+              <h4 class="text-xs font-semibold uppercase text-slate-400">资源</h4>
+              <p>帮助中心</p>
+              <p>行业白皮书</p>
+              <p>API文档</p>
+              <p>隐私政策</p>
+              <p>服务条款</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 h-px w-full bg-slate-800"></div>
+        <div class="mt-6 flex flex-col gap-4 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
+          <span>© 2026 鹏芯元创科技有限公司  保留所有权利</span>
+          <div id="contact" class="flex flex-wrap items-center gap-6">
+            <span>contact@zhilianai.com</span>
+            <span>沪ICP备XXXXXXXX号</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
