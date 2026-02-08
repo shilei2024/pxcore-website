@@ -31,13 +31,32 @@ fi
 
 echo -e "${GREEN}✅ Docker 已安装${NC}"
 
-# 检查 Docker Compose
-if ! docker compose version &> /dev/null && [ ! -x "/usr/bin/docker-compose" ]; then
-    echo -e "${RED}❌ 错误：Docker Compose 未安装${NC}"
-    exit 1
+# 检查 Docker Compose（支持 Docker Compose v2 和旧版 v1）
+echo -e "${YELLOW}📋 检查 Docker Compose...${NC}"
+
+COMPOSE_INSTALLED=false
+
+# 方法1：检查 Docker Compose v2（docker compose 子命令）
+if docker compose version > /dev/null 2>&1; then
+    COMPOSE_INSTALLED=true
+    COMPOSE_VERSION=$(docker compose version 2>/dev/null | head -n1)
+    echo -e "${GREEN}✅ Docker Compose v2 已安装：${COMPOSE_VERSION}${NC}"
+# 方法2：检查 Docker Compose v1（独立二进制文件）
+elif command -v docker-compose > /dev/null 2>&1 || [ -x "/usr/bin/docker-compose" ]; then
+    COMPOSE_INSTALLED=true
+    COMPOSE_VERSION=$(docker-compose --version 2>/dev/null || /usr/bin/docker-compose --version 2>/dev/null)
+    echo -e "${GREEN}✅ Docker Compose v1 已安装：${COMPOSE_VERSION}${NC}"
 fi
 
-echo -e "${GREEN}✅ Docker Compose 已安装${NC}"
+# 如果都未安装，报错
+if [ "$COMPOSE_INSTALLED" = false ]; then
+    echo -e "${RED}❌ 错误：Docker Compose 未安装${NC}"
+    echo ""
+    echo -e "${YELLOW}请使用以下命令安装：${NC}"
+    echo "  Ubuntu/Debian: apt install docker-compose-plugin"
+    echo "  或访问: https://docs.docker.com/compose/install/"
+    exit 1
+fi
 
 echo ""
 echo -e "${YELLOW}📦 步骤 1/4：安装依赖...${NC}"
