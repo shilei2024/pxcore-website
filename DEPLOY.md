@@ -668,6 +668,87 @@ sh deploy.sh
 2. 如果需要撤销修改，使用 `git restore deploy.sh` 替代
 3. 上传到服务器后，检查权限：`ls -la deploy.sh`
 
+### Q9：Docker 镜像拉取失败（connection refused）
+
+**问题表现：**
+```bash
+docker compose up -d
+# Error response from daemon: failed to resolve reference
+# "docker.io/certbot/certbot:latest": failed to do request:
+# Head "https://registry-1.docker.io/v2/certbot/certbot/manifests/latest":
+# dial tcp 185.45.6.57:443: connect: connection refused
+```
+
+**问题原因：**
+- 服务器在中国大陆，无法直接访问 Docker Hub
+- Docker Hub 被防火墙屏蔽
+
+**解决方案：**
+
+**方法一：使用配置脚本（推荐）**
+
+```bash
+# 1. 上传 setup-mirrors.sh 到服务器
+# 2. 执行配置脚本
+chmod +x setup-mirrors.sh
+sudo ./setup-mirrors.sh
+
+# 3. 重新部署
+./deploy.sh
+```
+
+**方法二：手动配置**
+
+```bash
+# 1. 编辑 Docker 配置
+mkdir -p /etc/docker
+cat > /etc/docker/daemon.json << 'EOF'
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+    "https://registry.docker-cn.com",
+    "https://mirror.ccs.tencentyun.com"
+  ]
+}
+EOF
+
+# 2. 重启 Docker
+systemctl restart docker
+
+# 3. 验证配置
+docker info | grep -A 5 "Registry Mirrors"
+```
+
+**方法三：手动拉取镜像后部署**
+
+如果上述方法无效，可以手动从国内镜像源拉取：
+
+```bash
+# 手动拉取需要的镜像
+docker pull registry.cn-hangzhou.aliyuncs.com/acs/certbot:latest
+docker tag registry.cn-hangzhou.aliyuncs.com/acs/certbot:latest certbot/certbot:latest
+
+# 然后继续部署
+docker compose up -d --build
+```
+
+**验证是否成功：**
+```bash
+# 检查镜像加速器是否生效
+docker info
+
+# 应该看到类似输出：
+# Registry Mirrors:
+#   https://docker.mirrors.ustc.edu.cn/
+#   https://hub-mirror.c.163.com/
+```
+
+**注意：**
+- 配置镜像加速器后，**需要重启 Docker 服务**
+- 之前下载的镜像可能需要删除后重新拉取
+- 部分镜像可能需要从其他渠道获取
+
 ---
 
 ## 快速参考卡片
