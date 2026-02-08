@@ -9,6 +9,9 @@
 1. [准备工作](#1-准备工作)
 2. [本地构建](#2-本地构建)
 3. [上传到服务器](#3-上传到服务器)
+   - [3.1 方法一：使用 FTP 工具（推荐新手）](#31-方法一使用-ftp-工具推荐新手)
+   - [3.2 方法二：使用 scp 命令](#32-方法二使用-scp-命令)
+   - [3.3 方法三：使用 GitHub（推荐）](#33-方法三使用-github推荐)
 4. [服务器部署](#4-服务器部署)
 5. [配置 HTTPS](#5-配置-https)
 6. [自动续期设置](#6-自动续期设置)
@@ -89,6 +92,18 @@ brew install node
 
 ### 2.2 获取项目代码
 
+**方式一：从 GitHub 克隆（推荐）**
+
+```bash
+# 克隆仓库
+git clone https://github.com/shilei2024/pxcore-website.git
+
+# 进入项目目录
+cd pxcore
+```
+
+**方式二：本地已有完整文件夹**
+
 确保你有完整的 `site` 文件夹，内容包括：
 ```
 site/
@@ -158,21 +173,92 @@ scp -r "d:\cursor-project\Website\site" root@你的服务器IP:/data/www/pxcore
 scp -r /path/to/site root@你的服务器IP:/data/www/pxcore
 ```
 
-### 3.3 方法三：使用 Git（推荐有经验的用户）
+### 3.3 方法三：使用 GitHub（推荐）
 
-**服务器上执行：**
+本项目已托管在 GitHub，推荐使用 Git 进行版本管理和部署。
+
+#### 3.3.1 首次部署（从 GitHub 克隆到服务器）
+
 ```bash
-# 安装 Git
+# 1. 安装 Git
 apt update && apt install git -y
 
-# 克隆仓库
+# 2. 进入部署目录
 cd /data/www
-git clone your-repository-url pxcore
 
-# 后续更新时
+# 3. 克隆仓库
+git clone https://github.com/shilei2024/pxcore-website.git
+
+# 4. 进入项目目录
+cd pxcore
+
+# 5. 首次部署
+./deploy.sh
+```
+
+#### 3.3.2 本地修改后同步到服务器
+
+**方式一：本地推送 → 服务器拉取（推荐）**
+
+```bash
+# 本地（你的电脑）：
+# 1. 修改代码后提交并推送到 GitHub
+cd d:\cursor-project\Website\site
+git add .
+git commit -m "feat: 修改说明"
+git push
+
+# 服务器（SSH 登录后）：
 cd /data/www/pxcore
 git pull
+./deploy.sh
 ```
+
+**方式二：FTP 上传后重新构建**
+
+```bash
+# 本地修改后，用 FTP 上传更新后的文件到服务器 /data/www/pxcore/
+# 然后在服务器执行：
+cd /data/www/pxcore
+./deploy.sh
+```
+
+#### 3.3.3 GitHub 代码推送流程
+
+**本地操作（你的电脑）：**
+
+```bash
+# 1. 进入项目目录
+cd d:\cursor-project\Website\site
+
+# 2. 查看修改状态
+git status
+
+# 3. 添加修改的文件
+git add .
+
+# 4. 提交修改
+git commit -m "feat: 修改说明"
+
+# 5. 推送到 GitHub
+git push
+```
+
+**认证方式：**
+
+GitHub 从 2021 年起不再支持密码认证，需要使用 Personal Access Token：
+
+1. 访问：https://github.com/settings/tokens
+2. 点击 **Generate new token (classic)**
+3. Note 填：`pxcore-website`
+4. Expiration 选：**No expiration**
+5. 勾选 **repo**
+6. 点击 **Generate token**
+7. **复制 Token**（只显示一次！）
+
+推送时：
+- Username：你的 GitHub 用户名
+- Password：粘贴生成的 Token
 
 ---
 
@@ -401,13 +487,25 @@ docker compose restart
 
 ### 7.4 更新网站
 
-**方式一：重新构建**
+**方式一：从 GitHub 拉取最新代码（推荐）**
+
 ```bash
+cd /data/www/pxcore
+git pull
+./deploy.sh
+```
+
+**方式二：FTP 上传后重新构建**
+
+```bash
+# 本地修改后，用 FTP 上传更新后的文件到服务器 /data/www/pxcore/
+# 然后在服务器执行：
 cd /data/www/pxcore
 ./deploy.sh
 ```
 
-**方式二：手动操作**
+**方式三：手动操作**
+
 ```bash
 cd /data/www/pxcore
 docker compose down
@@ -498,10 +596,26 @@ docker compose up -d --build
 ### Q6：如何修改网站内容
 
 **步骤：**
-1. 本地修改 `src/pages/index.astro`
-2. 本地执行 `npm run build`
-3. 上传更新的文件到服务器
-4. 服务器执行 `./deploy.sh`
+
+1. **本地修改代码**
+   ```bash
+   cd d:\cursor-project\Website\site
+   # 修改 src/pages/index.astro 等文件
+   ```
+
+2. **提交并推送到 GitHub**
+   ```bash
+   git add .
+   git commit -m "feat: 修改说明"
+   git push
+   ```
+
+3. **服务器拉取更新**
+   ```bash
+   cd /data/www/pxcore
+   git pull
+   ./deploy.sh
+   ```
 
 ### Q7：域名需要备案吗
 
