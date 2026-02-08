@@ -17,13 +17,13 @@ if [ ! -f "package.json" ]; then
 fi
 
 # 检查 Docker 是否安装
-if ! command -v docker &> /dev/null; then
+if ! docker --version &> /dev/null; then
     echo -e "${RED}❌ 错误：Docker 未安装，请先安装 Docker${NC}"
     exit 1
 fi
 
 # 检查 Docker Compose
-if ! command -v docker compose &> /dev/null; then
+if ! docker compose version &> /dev/null; then
     echo -e "${RED}❌ 错误：Docker Compose 未安装${NC}"
     exit 1
 fi
