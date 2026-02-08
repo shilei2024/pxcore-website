@@ -17,16 +17,20 @@ if [ ! -f "package.json" ]; then
 fi
 
 # 检查 Docker 是否安装
-if ! docker --version &> /dev/null; then
+if ! command -v docker &> /dev/null && [ ! -x "/usr/bin/docker" ]; then
     echo -e "${RED}❌ 错误：Docker 未安装，请先安装 Docker${NC}"
     exit 1
 fi
 
+echo -e "${GREEN}✅ Docker 已安装${NC}"
+
 # 检查 Docker Compose
-if ! docker compose version &> /dev/null; then
+if ! docker compose version &> /dev/null && [ ! -x "/usr/bin/docker-compose" ]; then
     echo -e "${RED}❌ 错误：Docker Compose 未安装${NC}"
     exit 1
 fi
+
+echo -e "${GREEN}✅ Docker Compose 已安装${NC}"
 
 echo ""
 echo -e "${YELLOW}📦 步骤 1/4：安装依赖...${NC}"
