@@ -624,6 +624,50 @@ docker compose up -d --build
 - 如果服务器在港澳台或海外，不需要备案
 - 具体请咨询你的云服务商
 
+### Q8：部署时提示 "Permission denied" 或 "command not found"
+
+**问题表现：**
+```bash
+./deploy.sh
+# bash: ./deploy.sh: Permission denied
+# 或
+deploy.sh
+# deploy.sh: command not found
+```
+
+**原因分析：**
+1. `git checkout deploy.sh` 或 `git reset deploy.sh` 命令会重置文件权限
+2. Git 默认不跟踪文件权限变化
+3. 从 GitHub 拉取代码后，文件可能失去可执行权限
+
+**解决方案：**
+
+**方法一：手动修复权限（推荐）**
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+**方法二：使用 bash 直接运行（不推荐）**
+```bash
+bash deploy.sh
+```
+
+**方法三：使用 sh 运行（不推荐）**
+```bash
+sh deploy.sh
+```
+
+**预防措施：**
+- 部署脚本已内置自动权限检查功能
+- 如果检测到权限不足，会自动尝试修复
+- 建议使用 `./deploy.sh` 方式运行
+
+**如何在 Windows 上避免此问题：**
+1. 不要使用 `git checkout` 命令恢复 deploy.sh
+2. 如果需要撤销修改，使用 `git restore deploy.sh` 替代
+3. 上传到服务器后，检查权限：`ls -la deploy.sh`
+
 ---
 
 ## 快速参考卡片

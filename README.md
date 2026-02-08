@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 鹏芯元创官网
 
 本项目为静态落地页，基于 Astro + Tailwind CSS 构建，适合一键部署到自有云服务器。
@@ -60,7 +59,3 @@ docker compose up -d --build
 ```sh
 docker compose run --rm certbot renew
 ```
-=======
-# pxcore-website
-a website
->>>>>>> ef1d0f0ff0aa69ebf930c2fa9be4747234678e1c
