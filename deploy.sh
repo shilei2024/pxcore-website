@@ -10,6 +10,13 @@ NC='\033[0m' # No Color
 echo -e "${GREEN}🚀 开始部署鹏芯元创官网${NC}"
 echo "================================"
 
+# 检查并修复脚本执行权限
+if [ ! -x "$0" ]; then
+    echo -e "${YELLOW}⚠️  脚本缺少执行权限，正在自动修复...${NC}"
+    chmod +x "$0"
+    echo -e "${GREEN}✅ 权限已修复${NC}"
+fi
+
 # 检查是否在正确的目录
 if [ ! -f "package.json" ]; then
     echo -e "${RED}❌ 错误：未找到 package.json，请确保在项目根目录执行此脚本${NC}"
